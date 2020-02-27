@@ -34,10 +34,10 @@ import java.util.Scanner;
 		Scanner varInput = new Scanner(System.in);
 		double newInput = varInput.nextDouble();
 			
-		while(newInput != 0.0)
+		while(newInput != 0)
 		{
 			varE.add(newInput);
-			System.out.println("Enter a new variable expense for the month or enter 0.0 to quit: ");
+			System.out.println("Enter a new variable expense for the month or enter 0 to quit: ");
 			newInput = varInput.nextDouble();
 		}
 		
@@ -52,10 +52,10 @@ import java.util.Scanner;
 		Scanner fixInput = new Scanner(System.in);
 		double newInput = fixInput.nextDouble();
 			
-		while(newInput != 0.0)
+		while(newInput != 0)
 		{
 			fixE.add(newInput);
-			System.out.println("Enter a new monthly expense or enter 0.0 to quit: ");
+			System.out.println("Enter a new monthly expense or enter 0 to quit: ");
 			newInput = fixInput.nextDouble();
 		}
 		
@@ -94,3 +94,5 @@ import java.util.Scanner;
 	}
 
 }
+
+
