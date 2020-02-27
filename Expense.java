@@ -5,6 +5,7 @@ public class Expense extends User{
 
 private ArrayList<Double> varExpense;
 private ArrayList<Double> fixExpense;
+	
 public ArrayList<Double> getVarExpense() 
 {
 	return varExpense;
