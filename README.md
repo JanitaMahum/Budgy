@@ -1,24 +1,28 @@
-# Budgy-
-
-Code (each seperate class) can be found in the master branch
+#Budgy-
 
 package Budgy;
-import Budgy.Transaction;
-import Budgy.User;
-import Budgy.Interface;
+
+import java.util.ArrayList;
 
 public class Main
 {
+	private String name;
+	private Double income;
+	private ArrayList<Double> varExpenses;
+	private ArrayList<Double> fixExpenses;
+	private double savings;
 	
-	public void main(String args[])
+	public Main()
 	{
-		User newUser = new User(null);
-		newUser.nameInput();
-		newUser.incomeInput();
-		newUser.getSavings();
-		newUser.addVarExpense();
-		newUser.addFixExpense();
-		System.out.println("Hi " + newUser.getName() + ", your total savings this month is $" + newUser.getSavings() + ".");
+		User newUser = new User(this.name,this.income,this.savings);
+		Transaction expenses = new Transaction(this.varExpenses, this.fixExpenses);
+	}
+	
+	public static void main(String args[])
+	{
+		User newUser = new User() ;
+		System.out.println("Hi " + newUser.nameInput() + ", your total savings this month is $" + 
+		newUser.totalSavings(newUser.addVarExpense(), newUser.addFixExpense(), newUser.incomeInput()) + ".");
 	}
 	
 }
@@ -37,6 +41,15 @@ import Budgy.Transaction;
 	private ArrayList<Double> fixExpenses;
 	private double savings;
 	
+	public User()
+	{
+		this.name = name;
+		this.income = income;
+		this.varExpenses = varExpenses;
+		this.fixExpenses = fixExpenses;
+		this.savings = savings;
+	}
+	
 	public User(User toCopy)
 	{
 		this.name = toCopy.name;
@@ -46,17 +59,12 @@ import Budgy.Transaction;
 		this.savings = toCopy.savings;
 	}
 	
-	//Transaction expense = new Transaction;
-//	Transaction.expInput();
-	
-	public User(String aName, double anIncome, double someSavings, ArrayList<Double> someVarExpenses, ArrayList<Double> someFixExpenses)
+	public User(String aName, double anIncome, double someSavings)
 	{
 		this.name = aName;
 		this.income = anIncome;
 		this.savings = someSavings;
-		Transaction expenses = new Transaction(someVarExpenses,someFixExpenses);
-		this.varExpenses = expenses.getVarExpense();
-		this.fixExpenses = expenses.getFixExpense();
+		Transaction expenses = new Transaction(this.varExpenses, this.fixExpenses);
 	}
 
 	public ArrayList<Double> addVarExpense()
@@ -98,17 +106,22 @@ import Budgy.Transaction;
 		return this.income;
 	}
 	
+	public double totalSavings(ArrayList<Double> varExpenses,ArrayList<Double> fixExpenses,double income)
+	{
+		Transaction expenses = new Transaction(varExpenses,fixExpenses);
+		double someSavings = this.income - expenses.totalVarExp(varExpenses) - expenses.totalFixExp(fixExpenses);
+		this.savings = someSavings;
+		return this.savings;
+	}
+	
 	public double getSavings()
 	{
-		Transaction expenses = new Transaction(this.varExpenses,this.fixExpenses);
-		double someSavings = income - expenses.totalVarExp() - expenses.totalFixExp();
-		this.savings = someSavings;
 		return this.savings;
 	}
 
 	public double getIncome() 
 	{
-		return income;
+		return this.income;
 	}
 
 	public void setIncome(double anIncome) 
@@ -140,22 +153,26 @@ public class Transaction {
 		this.fixExpenses = toCopy.fixExpenses;
 	}
 
-	public ArrayList<Double> expInput()
+	public ArrayList<Double> varExpInput()
 	{
-		ArrayList<Double> exp = new ArrayList<Double>();
-		System.out.println("Enter a new expense: ");
+		System.out.println("Enter a new variable expense: ");
 		Scanner expInput = new Scanner(System.in);
 		double newInput = expInput.nextDouble();
-		exp.add(newInput);
-			
-		//while(newInput != 0)
-		//{
-			//exp.add(newInput);
-			//System.out.println("Enter a new expense or enter 0 to quit: ");
-			//newInput = expInput.nextDouble();
-		//}
-		
-		return exp;
+		if (this.varExpenses == null) {this.varExpenses = new ArrayList<Double>();}
+		this.varExpenses.add(newInput);
+
+		return this.varExpenses;
+	}
+	
+	public ArrayList<Double> fixExpInput()
+	{
+		System.out.println("Enter a new fixed expense: ");
+		Scanner expInput = new Scanner(System.in);
+		double newInput = expInput.nextDouble();
+		if (this.fixExpenses == null) {this.fixExpenses = new ArrayList<Double>();}
+		this.fixExpenses.add(newInput);
+
+		return this.fixExpenses;
 	}
 	
 	public ArrayList<Double> getVarExpense() 
@@ -180,7 +197,7 @@ public class Transaction {
 
 	public ArrayList<Double> addVarExpense()
 	{
-		varExpenses.addAll(expInput());
+		varExpInput();
 		
 		return this.varExpenses;
 	}
@@ -195,7 +212,7 @@ public class Transaction {
 	
 	public ArrayList<Double> addFixExpense()
 	{
-		fixExpenses.addAll(expInput());
+		fixExpInput();;
 		
 		return this.fixExpenses;
 	}
@@ -208,7 +225,7 @@ public class Transaction {
 		
 	}
 
-	public double totalVarExp()
+	public double totalVarExp(ArrayList<Double> varExpenses)
 	{
 		double totalExp = 0;
 		
@@ -218,7 +235,7 @@ public class Transaction {
 		return totalExp;
 	}
 	
-	public double totalFixExp()
+	public double totalFixExp(ArrayList<Double> fixExpenses)
 	{
 		double totalExp = 0;
 		
@@ -228,19 +245,4 @@ public class Transaction {
 		return totalExp;
 	}
 
-}
-
-package Budgy;
-
-import java.util.ArrayList;
-
-public class Interface extends User 
-{
-
-	public Interface(String aName, double anIncome, ArrayList<Double> varExpenses, ArrayList<Double> fixExpenses,
-			double someSavings) {
-		super(aName, anIncome, varExpenses, fixExpenses, someSavings);
-		// TODO Auto-generated constructor stub
-	}
-	
 }
