@@ -230,6 +230,7 @@ public double totalFixExp(ArrayList<Double> fixExpenses)
 	return totalExp;
 	
 	package Budgy;
+package Budgy;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -295,23 +296,12 @@ public class Interface extends Application
 	   	@Override
 	   	public void handle(ActionEvent event)
 	   	{
-	   		String name = txtNum1.getText();
 	   		double income = Integer.parseInt(txtNum2.getText());
 	   		double varExp = Integer.parseInt(txtNum1.getText());
 	   		double fixExp = Integer.parseInt(txtNum2.getText());
 	   		double savings =  income - varExp - fixExp;
-	   		lblSum.setText("Hi " + name + ", your total savings is " + savings);
 	   		
-	        try {
-	            // intentional error
-	            name = "FOOBAR";
-	            int i = Integer.parseInt(name);
-
-	            System.out.println("int value = " + i);
-	        }
-	        catch (NumberFormatException nfe) {
-	            nfe.printStackTrace();
-	        }
+	        lblSum.setText("Hi, your total savings is " + savings);
 	    }
 	   	
 	   }
@@ -322,6 +312,5 @@ public class Interface extends Application
       primaryStage.setScene(scene);
       primaryStage.show();
    }
-}
 }
 }
