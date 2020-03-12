@@ -228,5 +228,100 @@ public double totalFixExp(ArrayList<Double> fixExpenses)
 	{totalExp += fixExpenses.get(index);}
 	
 	return totalExp;
+	
+	package Budgy;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.geometry.Insets;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
+public class Interface extends Application
+{
+   public static void main(String[] args)
+   {
+      launch(args);
+   }
+
+   @Override
+   public void start(Stage primaryStage) throws Exception
+   {
+	  BorderPane root = new BorderPane();
+	  // Margin of 10 pixels
+	  root.setPadding(new Insets(10,10,10,10));
+
+        Button btnAdd;
+        TextField txtNum1, txtNum2, txtNum3, txtNum4;
+        Label lblSum;
+
+	  root.setTop(new Label("Enter the following:"));
+
+	  lblSum = new Label("");
+	  root.setBottom(lblSum);
+
+	  GridPane center = new GridPane();
+	  center.setVgap(5);
+	  center.setHgap(5);
+	  txtNum1 = new TextField("Anon"); 
+	  txtNum1.setPrefWidth(150);
+	  txtNum2 = new TextField("0");
+	  txtNum2.setPrefWidth(150);
+	  txtNum3 = new TextField("0");
+	  txtNum3.setPrefWidth(150);
+	  txtNum4 = new TextField("0");
+	  txtNum4.setPrefWidth(150);
+	  center.add(new Label("Name:"), 0, 0);
+	  center.add(new Label("Income:"), 0, 1);
+	  center.add(new Label("Variable expense:"), 0, 2);
+	  center.add(new Label("Fixed Expense:"), 0, 3);
+	  center.add(txtNum1, 1, 0);
+	  center.add(txtNum2, 1, 1);
+	  center.add(txtNum3, 1, 2);
+	  center.add(txtNum4, 1, 3);
+	  btnAdd = new Button("Calculate Savings");
+	  center.add(btnAdd, 1, 5);
+	  root.setCenter(center);
+
+	  // Set the event handler when the button is clicked
+	  btnAdd.setOnAction(new EventHandler<ActionEvent>()
+	   {
+	   	@Override
+	   	public void handle(ActionEvent event)
+	   	{
+	   		String name = txtNum1.getText();
+	   		double income = Integer.parseInt(txtNum2.getText());
+	   		double varExp = Integer.parseInt(txtNum1.getText());
+	   		double fixExp = Integer.parseInt(txtNum2.getText());
+	   		double savings =  income - varExp - fixExp;
+	   		lblSum.setText("Hi " + name + ", your total savings is " + savings);
+	   		
+	        try {
+	            // intentional error
+	            name = "FOOBAR";
+	            int i = Integer.parseInt(name);
+
+	            System.out.println("int value = " + i);
+	        }
+	        catch (NumberFormatException nfe) {
+	            nfe.printStackTrace();
+	        }
+	    }
+	   	
+	   }
+	  );
+
+   	  Scene scene = new Scene(root, 450, 150);
+      primaryStage.setTitle("Compute the Sum");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+   }
+}
 }
 }
