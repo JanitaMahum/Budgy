@@ -2,6 +2,7 @@ package application;
 	
 import java.io.IOException;
 
+import Budgy.User;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +31,10 @@ import javafx.scene.text.Text;
 
 
 public class Main extends Application {
+	public Main() {
+		
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 			FirstController n = new FirstController();
@@ -80,8 +85,16 @@ public class Main extends Application {
 				{
 					String userName = nameText.getText();
 					System.out.println(userName);
+					System.out.println(incomeText.getText());
+					if(incomeText.getText() != "" || incomeText.getText() != null) {
+					//	int userIncome= Integer.parseInt(incomeText.getText());
+						//User user= new User(userName,userIncome,0);
+
+					}
 				}
 			);
+				
+				
 			/*p.setHgap(8);
 	        p.setVgap(8);
 	        p.setPadding(new Insets(5));
@@ -141,12 +154,10 @@ public class Main extends Application {
 			   }
 			  );*/
 
-			//next.addEventHandler(MouseEvent.MOUSE_DRAGGED, new FirstController(next));
 
 	}
 				
-		//next.addEventHandler(MouseEvent.MOUSE_DRAGGED, handler);
-	
+
 	
 	public static void main(String[] args) {
 		launch(args);
