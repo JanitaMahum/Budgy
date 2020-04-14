@@ -41,42 +41,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-/** This is the main class and it runs the application
 
- */
+/** Main class that runs GUI */
+
 public class Main extends Application {
 	
 	int counter = 0;
 	User newUser;
 	SavingCalculator newSavCalc;
-	Label newLabel;
-	Label finalLabel;
-	ArrayList<Double> expenses;
-	TextField newTextField;
-	double firstExp;
-	double addExp;
-	double totalExp;
 	
-	/**
-	* This is the Main method which intializes the variables.
-	* @param Nothing.
-	* @return Nothing.
-	*/
 	public Main()
 	{
 		newUser = new User();
 		newSavCalc = new SavingCalculator();
-		newLabel = new Label();
-		expenses = newUser.getExpense();
-		newTextField = new TextField();
 		this.counter = 0;
 	}
 	
-	/**
-	* This is the Main method constructor which takes arguements.
-	* @param String aName, double anIncome, ArrayList<Double> someExpenses, double someSavings.
-	* @return Nothing.
-	*/
+	
+	/** specified constructor for Main class 
+	 * @param aName - name of user
+	 * @param anIncome - income of user
+	 * @param someExpenses - expenses of user
+	 * @param someSavings - savings of user
+	 * */
+	
 	public Main(String aName, double anIncome, ArrayList<Double> someExpenses, double someSavings)
 	{
 		newUser = new User(aName, anIncome, someExpenses);
@@ -84,6 +72,8 @@ public class Main extends Application {
 	}
 	
 
+	
+	/** start method will set stage for GUI  */
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -142,10 +132,8 @@ public class Main extends Application {
 		        for (int index = 0; index < 100; index++)
 		        {
 		        	TextField tF = new TextField(String.valueOf(index+1));
-		        	tF.setId("TF"+String.valueOf(index+1));
 		        	tF.setText("0.0");
-		        	textFields.add(tF);
-		        	System.out.println(tF);	
+		        	textFields.add(tF);;	
 		        }
 		        
 		        
@@ -154,11 +142,9 @@ public class Main extends Application {
 
 		        addExp.setOnAction(e -> 
 		        {
-		        	System.out.println(textFields.get(this.counter).getText());
 		        	newUser.addExpense(Double.valueOf(textFields.get(this.counter).getText()));
 		        	this.counter++;
 		        	p.add(textFields.get(this.counter), 1, 4);
-		        	System.out.println(newUser.getExpense());
 
 		        });
 
@@ -181,7 +167,7 @@ public class Main extends Application {
 					q.setHgap(10);
 					q.setVgap(10);
 					q.setPadding(new Insets(25, 25, 25, 25));
-					Text results = new Text("Results");
+					Text results = new Text("Results:");
 					results.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 					q.add(results, 0, 0, 2, 1);
 					Text scene3Title = new Text("Hi " + newUser.getName() + "...");
@@ -209,20 +195,14 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
-
-			primaryStage.setScene(scene);
-			primaryStage.show();
-
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 			
 
 	}
-	
 
-
-	
+	/** used to run GUI */
 	
 	public static void main(String[] args) 
 	{

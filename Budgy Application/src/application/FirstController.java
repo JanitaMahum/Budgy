@@ -14,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
+/** FirstController class will implement EventHandler and link user inputs(back-end) to GUI */
+
 public class FirstController implements EventHandler{
 	TextField aName;
     Button getStarted;
