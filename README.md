@@ -14,7 +14,7 @@ Navigate to src folder and prepare to run program.
 
 To run textbased application:
 
-  - Naviagte to package labelled "backend" and run it. 
+  - Navigate to package labelled "backend" and run it. 
   
   
 To run GUI:
